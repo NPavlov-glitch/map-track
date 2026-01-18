@@ -52,7 +52,7 @@ export function MapDrawing({ onRouteUpdate }: { onRouteUpdate: (path: any[]) => 
     const position: [number, number] = [51.505, -0.09];
 
     return (
-        <div className="w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
+        <div className="">
             <MapContainer
                 center={position}
                 zoom={13}

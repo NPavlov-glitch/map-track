@@ -4,11 +4,15 @@ import { Input } from '@/components/ui/input';
 import { Head, useForm } from '@inertiajs/react';
 import { MapDrawing } from '@/components/map-drawing';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { useState } from 'react';
 
 export default function Create() {
+    const [isMapOpen, setIsMapOpen] = useState(false);
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         distance: '',
+        route: [],
     });
 
     const submit = (e: React.FormEvent) => {
@@ -48,16 +52,22 @@ export default function Create() {
                         disabled={processing}
                         className="w-fit"
                         onClick={() => {
+                            setIsMapOpen(true);
                         }}
                     >
                         Draw Route
                     </Button>
 
-                    <MapDrawing
-                        onRouteUpdate={(route) => {
-                            setData('route', route);
-                        }}
-                    />
+                    <Dialog open={isMapOpen} onOpenChange={(open) => !open && setIsMapOpen(false)}>
+                        <DialogContent className="max-w-[95vw] w-[95vw] h-[95vh] max-h-[95vh] p-0 overflow-hidden">
+                            <MapDrawing
+                                onRouteUpdate={(route) => {
+                                    setData({ ...data, route: route as unknown as never[] });
+                                    setIsMapOpen(false); // Close after saving
+                                }}
+                            />
+                        </DialogContent>
+                    </Dialog>
                 </form>
             </div>
         </AppLayout>
