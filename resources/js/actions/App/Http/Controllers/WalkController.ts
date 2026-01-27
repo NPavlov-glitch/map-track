@@ -155,6 +155,61 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
     
     create.form = createForm
-const WalkController = { index, create }
+/**
+* @see \App\Http\Controllers\WalkController::add
+ * @see app/Http/Controllers/WalkController.php:21
+ * @route '/walks'
+ */
+export const add = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: add.url(options),
+    method: 'post',
+})
+
+add.definition = {
+    methods: ["post"],
+    url: '/walks',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\WalkController::add
+ * @see app/Http/Controllers/WalkController.php:21
+ * @route '/walks'
+ */
+add.url = (options?: RouteQueryOptions) => {
+    return add.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\WalkController::add
+ * @see app/Http/Controllers/WalkController.php:21
+ * @route '/walks'
+ */
+add.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: add.url(options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\WalkController::add
+ * @see app/Http/Controllers/WalkController.php:21
+ * @route '/walks'
+ */
+    const addForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: add.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\WalkController::add
+ * @see app/Http/Controllers/WalkController.php:21
+ * @route '/walks'
+ */
+        addForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: add.url(options),
+            method: 'post',
+        })
+    
+    add.form = addForm
+const WalkController = { index, create, add }
 
 export default WalkController

@@ -29,13 +29,19 @@ export function MapDrawing({ onRouteUpdate }: { onRouteUpdate: (path: any[]) => 
                 drawText: true,
             });
 
+            const updateCoords = (layer: any) => {
+                const coordinates = layer.getLatLngs();
+                const convertedCoordinates = coordinates.map((coordinate: any) => ({lat: coordinate.lat, lng: coordinate.lng}));
+                onRouteUpdate(convertedCoordinates);
+            }
+
             // Listen for when a line is finished drawing
             map.on('pm:create', (e: any) => {
-                if (e.shape === 'Line') {
-                    const coordinates = e.layer.getLatLngs();
-                    // Send coordinates back to the Inertia form
-                    onRouteUpdate(coordinates);
-                }
+                const layer = e.layer;
+                updateCoords(layer);
+
+                layer.on('pm:edit', () => updateCoords(layer));
+                layer.on('pm:remove', () => onRouteUpdate([]));
             });
 
             return () => {
@@ -49,13 +55,13 @@ export function MapDrawing({ onRouteUpdate }: { onRouteUpdate: (path: any[]) => 
 
     if (!mounted) return null;
 
-    const position: [number, number] = [51.505, -0.09];
+    const position: [number, number] = [43.2167, 27.9167];
 
     return (
-        <div className="">
+        <div className="w-full h-full">
             <MapContainer
                 center={position}
-                zoom={13}
+                zoom={17}
                 scrollWheelZoom={false}
                 style={{ height: '100%', width: '100%' }}
             >

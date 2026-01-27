@@ -11,13 +11,21 @@ export default function Create() {
     const [isMapOpen, setIsMapOpen] = useState(false);
     const { data, setData, post, processing, errors } = useForm({
         name: '',
-        distance: '',
-        route: [],
+        distance: 0,
+        average_speed: '',
+        route: [] as any[],
+        start_time: '',
+        end_time: '',
     });
 
-    const submit = (e: React.FormEvent) => {
+    const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         post('/walks'); // This would send the data to a 'store' method in your controller
+    };
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(data);
     };
 
     return (
@@ -27,15 +35,30 @@ export default function Create() {
                 <h1 className="text-4xl font-black mb-5">
                     New <span className="text-white/20">Walk</span>
                 </h1>
-                <form className="flex flex-col gap-4">
+                <form onSubmit={submit} className="flex flex-col gap-4">
+                    <div className="grid gap-2">
+                        <Label htmlFor="name">Title</Label>
+                        <Input
+                            id="name"
+                            type="text"
+                            name="name"
+                            value={data.name}
+                            onChange={(e) => setData({ ...data, name: e.target.value })}
+                            placeholder="Give it a name"
+                        />
+                        {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
+                    </div>
                     <div className="grid gap-2">
                         <Label htmlFor="start_time">Start Time</Label>
                         <Input
                             id="start_time"
                             type="datetime-local"
                             name="start_time"
-                            required
+                            value={data.start_time}
+                            onChange={(e) => setData({ ...data, start_time: e.target.value })}
+                            min={new Date().toISOString().slice(0,16)}
                         />
+                        {errors.start_time && <div className="text-red-500 text-sm">{errors.start_time}</div>}
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="end_time">End Time</Label>
@@ -43,8 +66,11 @@ export default function Create() {
                             id="end_time"
                             type="datetime-local"
                             name="end_time"
-                            required
+                            value={data.end_time}
+                            onChange={(e) => setData({ ...data, end_time: e.target.value })}
+                            min={new Date().toISOString().slice(0,16)}
                         />
+                        {errors.end_time && <div className="text-red-500 text-sm">{errors.end_time}</div>}
                     </div>
 
                     <Button
@@ -59,7 +85,7 @@ export default function Create() {
                     </Button>
 
                     <Dialog open={isMapOpen} onOpenChange={(open) => !open && setIsMapOpen(false)}>
-                        <DialogContent className="max-w-[95vw] w-[95vw] h-[95vh] max-h-[95vh] p-0 overflow-hidden">
+                        <DialogContent className="max-w-[95vw] w-[95vw] sm:max-w-[95vw] h-[95vh] max-h-[95vh] p-0 overflow-hidden">
                             <MapDrawing
                                 onRouteUpdate={(route) => {
                                     setData({ ...data, route: route as unknown as never[] });
@@ -68,6 +94,8 @@ export default function Create() {
                             />
                         </DialogContent>
                     </Dialog>
+
+                    <Button type="submit" disabled={processing}>Create Walk</Button>
                 </form>
             </div>
         </AppLayout>

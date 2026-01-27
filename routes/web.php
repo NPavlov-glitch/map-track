@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/walks', [WalkController::class, 'index'])->name('walks.index');
 
     Route::get('/walks/create', [WalkController::class, 'create'])->name('walks.create');
+    Route::post('/walks', [WalkController::class, 'add'])->name('walks.add');
 });
 
 require __DIR__.'/settings.php';

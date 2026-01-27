@@ -35,16 +35,7 @@ const footerNavItems: NavItem[] = [
         title: 'Add Walk',
         href: walks.create(),
         icon: FolderPlusIcon,
-    },
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        target: '_self',
     },
 ];
 
