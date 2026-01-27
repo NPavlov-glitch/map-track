@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Walk;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class WalkController extends Controller
 {
@@ -31,6 +32,7 @@ class WalkController extends Controller
         ]);
         $validated['distance'] = round($this->calculateDistance($validated['route']), 2);
         $validated['average_speed'] = $validated['average_speed'] ?? 0;
+        $validated['duration'] = $this->calculateDuration($validated['end_time'], $validated['start_time']);
 
         auth()->user()->walks()->create($validated);
 
@@ -69,6 +71,10 @@ class WalkController extends Controller
         $c = 2 * atan2( sqrt( $a ), sqrt( 1 - $a ) );
 
         return $radius * $c;
+    }
+
+    private function calculateDuration( string $start_time, string $end_time ) {
+        return Carbon::parse($end_time)->diffInMinutes(Carbon::parse($start_time));
     }
 
 }

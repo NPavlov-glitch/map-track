@@ -19,6 +19,7 @@ class Walk extends Model
         'end_time',
         'distance',
         'average_speed',
+        'duration',
     ];
 
     protected function casts(): array
@@ -29,6 +30,7 @@ class Walk extends Model
             'end_time' => 'datetime',
             'distance' => 'decimal:2',
             'average_speed' => 'decimal:2',
+            'duration' => 'integer',
         ];
     }
 

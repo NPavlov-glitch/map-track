@@ -13,6 +13,7 @@ interface Walk {
     start_time: string;
     end_time: string;
     route: any;
+    duration: number;
 }
 
 interface Props {
@@ -89,7 +90,7 @@ export default function Index({ walks }: Props) {
                                             {formatDate(walk.start_time)} at {formatTime(walk.start_time)}
                                         </div>
 
-                                        <div className="grid grid-cols-2 gap-4 pt-4 border-t">
+                                        <div className="grid grid-cols-3 gap-4 pt-4 border-t">
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] uppercase font-medium text-muted-foreground">Distance</span>
                                                 <span className="text-lg font-bold">{walk.distance} km</span>
@@ -97,6 +98,10 @@ export default function Index({ walks }: Props) {
                                             <div className="flex flex-col">
                                                 <span className="text-[10px] uppercase font-medium text-muted-foreground">Avg Speed</span>
                                                 <span className="text-lg font-bold">{walk.average_speed} km/h</span>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-[10px] uppercase font-medium text-muted-foreground">Duration</span>
+                                                <span className="text-lg font-bold">{walk.duration} min</span>
                                             </div>
                                         </div>
                                     </CardContent>
