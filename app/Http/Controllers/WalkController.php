@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Walk;
+use Illuminate\Http\Request;
 
 class WalkController extends Controller
 {
@@ -28,11 +29,46 @@ class WalkController extends Controller
             'start_time' => 'required|date',
             'end_time' => 'required|date',
         ]);
-        $validated['distance'] = $validated['distance'] ?? 0;
+        $validated['distance'] = round($this->calculateDistance($validated['route']), 2);
         $validated['average_speed'] = $validated['average_speed'] ?? 0;
 
         auth()->user()->walks()->create($validated);
 
         return redirect()->route('walks.index');
     }
+
+    private function calculateDistance(array $route)
+    {
+        $distance = 0;
+
+        for ( $index = 0; $index < count($route) - 1; $index++ ) {
+            if ( isset($route[$index]['lat']) && isset($route[$index]['lng']) && isset($route[$index+1]['lat']) && isset($route[$index+1]['lng']) ) {
+                $distance += $this->calculateHaversineDistance( $route[$index], $route[$index+1] );
+            }
+        }
+
+        return $distance;
+    }
+
+    private function calculateHaversineDistance( array $first_pair, array $second_pair, $unit = 'km' ) {
+
+        $radius = ( $unit === 'mi' ) ? 3958.8 : 6371.0;
+
+        $lat1 = deg2rad( $first_pair['lat'] );
+        $lon1 = deg2rad( $first_pair['lng'] );
+        $lat2 = deg2rad( $second_pair['lat'] );
+        $lon2 = deg2rad( $second_pair['lng'] );
+
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        $a = sin( $dLat / 2 ) ** 2 +
+             cos( $lat1 ) * cos( $lat2 ) *
+             sin( $dLon / 2 ) ** 2;
+
+        $c = 2 * atan2( sqrt( $a ), sqrt( 1 - $a ) );
+
+        return $radius * $c;
+    }
+
 }

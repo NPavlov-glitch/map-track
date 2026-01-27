@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\WalkController::index
- * @see app/Http/Controllers/WalkController.php:10
+ * @see app/Http/Controllers/WalkController.php:11
  * @route '/walks'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
 create.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
     const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
         createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\WalkController::create
- * @see app/Http/Controllers/WalkController.php:16
+ * @see app/Http/Controllers/WalkController.php:17
  * @route '/walks/create'
  */
         createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     create.form = createForm
 /**
 * @see \App\Http\Controllers\WalkController::add
- * @see app/Http/Controllers/WalkController.php:21
+ * @see app/Http/Controllers/WalkController.php:22
  * @route '/walks'
  */
 export const add = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -172,7 +172,7 @@ add.definition = {
 
 /**
 * @see \App\Http\Controllers\WalkController::add
- * @see app/Http/Controllers/WalkController.php:21
+ * @see app/Http/Controllers/WalkController.php:22
  * @route '/walks'
  */
 add.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ add.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\WalkController::add
- * @see app/Http/Controllers/WalkController.php:21
+ * @see app/Http/Controllers/WalkController.php:22
  * @route '/walks'
  */
 add.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -191,7 +191,7 @@ add.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\WalkController::add
- * @see app/Http/Controllers/WalkController.php:21
+ * @see app/Http/Controllers/WalkController.php:22
  * @route '/walks'
  */
     const addForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -201,7 +201,7 @@ add.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\WalkController::add
- * @see app/Http/Controllers/WalkController.php:21
+ * @see app/Http/Controllers/WalkController.php:22
  * @route '/walks'
  */
         addForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
