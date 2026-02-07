@@ -4,6 +4,8 @@ import { Head, Link } from '@inertiajs/react';
 import { Footprints, Calendar, ArrowUpRight, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import { WalkModal } from '@/components/walk-modal';
 
 interface Walk {
     id: number;
@@ -28,6 +30,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ walks }: Props) {
+    const [selectedWalk, setSelectedWalk] = useState<Walk | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const formatDate = (dateString: string) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             month: 'short',
@@ -42,6 +47,11 @@ export default function Index({ walks }: Props) {
             minute: '2-digit',
         });
     };
+
+    const handleWalkClick = (walk: Walk) => {
+        setSelectedWalk(walk);
+        setIsModalOpen(true);
+    }
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -76,7 +86,7 @@ export default function Index({ walks }: Props) {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {walks.map((walk) => (
-                            <Link key={walk.id} href={`/walks/${walk.id}`}>
+                            <div key={walk.id} onClick={() => handleWalkClick(walk)}>
                                 <Card className="hover:border-primary transition-colors cursor-pointer overflow-hidden">
                                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                         <CardTitle className="text-base font-bold">
@@ -106,11 +116,17 @@ export default function Index({ walks }: Props) {
                                         </div>
                                     </CardContent>
                                 </Card>
-                            </Link>
+                            </div>
                         ))}
                     </div>
                 )}
             </div>
+
+            <WalkModal
+                walk={selectedWalk}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </AppLayout>
     );
 }

@@ -31,8 +31,8 @@ class WalkController extends Controller
             'end_time' => 'required|date',
         ]);
         $validated['distance'] = round($this->calculateDistance($validated['route']), 2);
-        $validated['average_speed'] = $validated['average_speed'] ?? 0;
         $validated['duration'] = $this->calculateDuration($validated['end_time'], $validated['start_time']);
+        $validated['average_speed'] = $this->calculateAverageSpeed($validated['distance'], $validated['duration']);
 
         auth()->user()->walks()->create($validated);
 
@@ -77,4 +77,7 @@ class WalkController extends Controller
         return Carbon::parse($end_time)->diffInMinutes(Carbon::parse($start_time));
     }
 
+    private function calculateAverageSpeed( float $distance, int $duration ) {
+        return round($distance / $duration, 2);
+    }
 }
