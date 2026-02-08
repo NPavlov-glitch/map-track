@@ -1,5 +1,83 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
+    method: 'get',
+})
+
+index.definition = {
+    methods: ["get","head"],
+    url: '/profile',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+index.url = (options?: RouteQueryOptions) => {
+    return index.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: index.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: index.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+    const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: index.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+        indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ProfileViewController::index
+ * @see app/Http/Controllers/ProfileViewController.php:10
+ * @route '/profile'
+ */
+        indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    index.form = indexForm
+/**
 * @see \App\Http\Controllers\Settings\ProfileController::edit
  * @see app/Http/Controllers/Settings/ProfileController.php:19
  * @route '/settings/profile'
@@ -75,7 +153,7 @@ edit.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-
+    
     edit.form = editForm
 /**
 * @see \App\Http\Controllers\Settings\ProfileController::update
@@ -140,7 +218,7 @@ update.patch = (options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
                     }),
             method: 'post',
         })
-
+    
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\Settings\ProfileController::destroy
@@ -205,10 +283,11 @@ destroy.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
                     }),
             method: 'post',
         })
-
+    
     destroy.form = destroyForm
 const profile = {
-    edit: Object.assign(edit, edit),
+    index: Object.assign(index, index),
+edit: Object.assign(edit, edit),
 update: Object.assign(update, update),
 destroy: Object.assign(destroy, destroy),
 }

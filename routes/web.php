@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\WalkController;
+use App\Http\Controllers\ProfileViewController;
 
 Route::get('/', function () {
     return Inertia::render('welcome', [
@@ -20,6 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/walks/create', [WalkController::class, 'create'])->name('walks.create');
     Route::post('/walks', [WalkController::class, 'add'])->name('walks.add');
+
+    Route::get('/profile', [ProfileViewController::class, 'index'])->name('profile.index');
 });
 
 require __DIR__.'/settings.php';

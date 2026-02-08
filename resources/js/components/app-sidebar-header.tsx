@@ -1,9 +1,9 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
-import { edit as profileEdit } from '@/routes/profile';
 import { Link } from '@inertiajs/react';
 import { User } from 'lucide-react';
+import { index as profileIndex } from '@/routes/profile';
 
 export function AppSidebarHeader({
     breadcrumbs = [],
@@ -17,7 +17,7 @@ export function AppSidebarHeader({
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
             </div>
             <Link
-                href={profileEdit().url}
+                href={profileIndex().url}
                 className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                 aria-label="Profile settings"
             >
