@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/walks', [WalkController::class, 'add'])->name('walks.add');
 
     Route::get('/profile', [ProfileViewController::class, 'index'])->name('profile.index');
+
 });
 
 require __DIR__.'/settings.php';
